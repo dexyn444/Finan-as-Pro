@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Meu Gestor Financeiro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <h1><i class="fa-solid fa-wallet"></i> Finanças<span>Pro</span></h1>
+            <div class="salary-box">
+                <small>Seu Salário Mensal</small>
+                <div class="input-with-icon">
+                    <span>R$</span>
+                    <input type="number" id="salary" placeholder="0,00" oninput="updateDashboard()">
+                </div>
+            </div>
+        </header>
+
+        <main class="content-grid">
+            <section class="left-col">
+                <div class="card glass">
+                    <h3><i class="fa-solid fa-plus-circle"></i> Novo Cartão</h3>
+                    <div class="form-group">
+                        <input type="text" id="cardName" placeholder="Apelido do Cartão">
+                        <div class="row">
+                            <input type="number" id="cardLimit" placeholder="Limite total">
+                            <input type="number" id="cardSpend" placeholder="Fatura atual">
+                        </div>
+                        <button onclick="addCard()" class="btn-primary">Adicionar Cartão</button>
+                    </div>
+                </div>
+
+                <div id="cardList" class="card-list">
+                    </div>
+            </section>
+
+            <section class="right-col">
+                <div class="card glass summary-card">
+                    <h3>Resumo de Gastos</h3>
+                    <div class="chart-box">
+                        <canvas id="expenseChart"></canvas>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span>Gasto Total</span>
+                            <h4 id="totalSpent">R$ 0,00</h4>
+                        </div>
+                        <div class="stat-item">
+                            <span>Saldo Livre</span>
+                            <h4 id="finalBalance" class="positive">R$ 0,00</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card glass" style="margin-top: 20px;">
+    <h3><i class="fa-solid fa-house-lock"></i> Gastos Fixos</h3>
+    <div class="form-group">
+        <input type="text" id="fixedName" placeholder="Ex: Aluguel, Energia, Internet">
+        <div class="row">
+            <input type="number" id="fixedValue" placeholder="Valor R$">
+            <button onclick="addFixedExpense()" class="btn-secondary">Adicionar</button>
+        </div>
+    </div>
+</div>
+
+<div id="fixedList" class="card-list"></div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
