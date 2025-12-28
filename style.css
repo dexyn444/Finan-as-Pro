@@ -1,277 +1,60 @@
 :root {
-    --primary: #4f46e5;
-    --success: #10b981;
-    --danger: #ef4444;
-    --bg: #f8fafc;
-    --text-main: #1e293b;
-    --glass: rgba(255, 255, 255, 0.9);
+    --primary: #4f46e5; --success: #10b981; --danger: #ef4444;
+    --reserve-color: #8b5cf6; --bg: #f3f4f6; --card-bg: #ffffff;
+    --text-main: #1f2937; --text-muted: #6b7280; --border: #e5e7eb; --input-bg: #f9fafb;
 }
 
-body {
-    font-family: 'Inter', system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text-main);
-    margin: 0;
-    display: flex;
-    justify-content: center;
+[data-theme="dark"] {
+    --bg: #0f172a; --card-bg: #1e293b; --text-main: #f8fafc;
+    --text-muted: #94a3b8; --border: #334155; --input-bg: #334155;
 }
 
-.app-container {
-    width: 100%;
-    max-width: 1100px;
-    padding: 20px;
+* { box-sizing: border-box; margin: 0; padding: 0; transition: background 0.2s, color 0.2s; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-main); }
+
+.top-bar {
+    background: var(--card-bg); padding: 10px 20px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100; flex-wrap: wrap; gap: 15px;
 }
 
-/* Header & Salary */
-.main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    padding: 20px;
+.logo-area { display: flex; align-items: center; gap: 15px; }
+.logo { font-weight: 800; color: var(--primary); font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
+
+.quick-add { display: flex; gap: 8px; flex-wrap: wrap; }
+.mini-group { 
+    display: flex; align-items: center; background: var(--input-bg); 
+    border: 1px solid var(--border); border-radius: 10px; padding: 4px 8px;
 }
 
-h1 i { color: var(--primary); margin-right: 10px; }
-h1 span { font-weight: 300; }
+input { border: none; background: transparent; color: var(--text-main); padding: 5px; font-size: 0.85rem; outline: none; width: 85px; }
+.mini-group input:first-of-type { width: 110px; border-right: 1px solid var(--border); }
+        
+button { border: none; background: var(--primary); color: white; padding: 6px 10px; border-radius: 8px; cursor: pointer; }
+.btn-theme { background: var(--input-bg); color: var(--text-main); border: 1px solid var(--border); font-size: 1rem; }
+.btn-res { background: var(--reserve-color); }
 
-.salary-box { text-align: right; }
-.input-with-icon {
-    display: flex;
-    align-items: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--primary);
+.main-content { padding: 20px; max-width: 1300px; margin: auto; }
+.dashboard-grid { display: grid; grid-template-columns: 1.8fr 1fr; gap: 20px; margin-bottom: 25px; }
+.card { background: var(--card-bg); padding: 25px; border-radius: 20px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+
+.chart-box { height: 320px; position: relative; }
+.stat-card { display: flex; flex-direction: column; justify-content: center; margin-bottom: 15px; }
+.stat-card small { font-weight: 700; color: var(--text-muted); text-transform: uppercase; font-size: 0.7rem; }
+.stat-card h2 { font-size: 2.2rem; margin-top: 5px; }
+
+.lists-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+.list-column h4 { margin-bottom: 15px; color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+
+.card-item { 
+    background: var(--card-bg); padding: 14px; border-radius: 14px; 
+    margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); 
 }
-.input-with-icon input {
-    border: none;
-    background: transparent;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--primary);
-    width: 150px;
-    outline: none;
-}
-
-/* Grid Layout */
-.content-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 25px;
-}
-
-.card {
-    background: var(--glass);
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
-    border: 1px solid rgba(255,255,255,0.3);
-}
-
-.row { display: flex; gap: 10px; }
-
-input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    transition: 0.3s;
-}
-
-input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); }
-
-.btn-primary {
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 14px;
-    border-radius: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    width: 100%;
-    transition: 0.3s;
-}
-
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3); }
-
-/* Listagem de Cartões */
-.card-item {
-    background: white;
-    padding: 15px;
-    border-radius: 15px;
-    margin-top: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid #f1f5f9;
-}
-
-.card-info h4 { margin: 0; color: #334155; }
-.card-info small { color: #64748b; }
-
-.btn-delete {
-    background: #fee2e2;
-    color: var(--danger);
-    border: none;
-    width: 35px;
-    height: 35px;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-/* Dashboard */
-.chart-box { margin: 20px 0; min-height: 200px; }
-.stats-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-top: 20px;
-    border-top: 1px solid #f1f5f9;
-    padding-top: 20px;
-}
-
-.stat-item span { font-size: 0.8rem; color: #64748b; text-transform: uppercase; }
-.stat-item h4 { margin: 5px 0 0 0; font-size: 1.2rem; }
-
+.btn-del { background: transparent; color: var(--danger); font-size: 1.1rem; }
 .positive { color: var(--success); }
 .negative { color: var(--danger); }
 
-@media (max-width: 768px) {
-    .content-grid { grid-template-columns: 1fr; }
-}
-.btn-secondary {
-    background: #64748b;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.btn-secondary:hover { background: #475569; }
-
-.fixed-item {
-    border-left: 5px solid #64748b !important; /* Cor cinza para diferenciar de cartões */
-}
-
-/* Ajuste para que a lista de cartões e fixos fiquem visualmente separadas */
-#fixedList:before {
-    content: "Contas Fixas";
-    font-size: 0.8rem;
-    color: #94a3b8;
-    text-transform: uppercase;
-    display: block;
-    margin: 15px 0 5px 5px;
-}
-
-:root {
-    --primary: #4f46e5;
-    --secondary: #64748b;
-    --success: #10b981;
-    --danger: #ef4444;
-    --bg: #f8fafc;
-    --glass: rgba(255, 255, 255, 0.95);
-}
-
-/* Reset básico para evitar quebras em telas grandes */
-* { box-sizing: border-box; }
-
-body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-}
-
-.app-container {
-    width: 100%;
-    max-width: 1400px; /* Aumentado para TVs */
-    padding: 20px;
-}
-
-/* Layout em Grid Flexível */
-.content-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
-}
-
-/* Header Responsivo */
-.main-header {
-    display: flex;
-    flex-wrap: wrap; /* Permite quebrar linha no celular */
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
-    gap: 20px;
-}
-
-.input-with-icon input {
-    border: none; background: transparent; font-size: clamp(1.5rem, 5vw, 2.5rem); /* Fonte cresce com a tela */
-    font-weight: 800; color: var(--primary); width: 200px; outline: none;
-}
-
-/* Estilo dos Cards */
-.card {
-    background: var(--glass);
-    padding: clamp(15px, 3vw, 30px); /* Espaçamento interno adaptável */
-    border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    border: 1px solid #fff;
-}
-
-/* Ajustes para TV (Telas muito grandes) */
-@media (min-width: 1900px) {
-    body { font-size: 22px; } /* Aumenta a base do texto para leitura à distância */
-    .app-container { max-width: 1800px; }
-    .content-grid { grid-template-columns: 1fr 1fr 1fr; } /* 3 colunas em TVs UltraWide */
-    .input-with-icon input { width: 300px; }
-}
-
-/* Ajustes para Celular */
-@media (max-width: 600px) {
-    .content-grid {
-        grid-template-columns: 1fr; /* Força uma única coluna */
-    }
-    
-    .main-header {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .salary-box {
-        text-align: center;
-        width: 100%;
-    }
-
-    .input-with-icon {
-        justify-content: center;
-    }
-
-    .row {
-        flex-direction: column; /* Inputs um em cima do outro no celular */
-    }
-    
-    .btn-secondary {
-        padding: 15px; /* Botão maior para facilitar o toque */
-    }
-}
-
-/* Melhorias Visuais Gerais */
-.chart-box { 
-    position: relative;
-    margin: auto;
-    height: 40vh; /* O gráfico ocupa 40% da altura da tela */
-    min-height: 250px;
-    max-height: 500px;
-}
-
-.card-item {
-    background: white; padding: 15px; border-radius: 15px;
-    margin-top: 12px; display: flex; justify-content: space-between;
-    align-items: center; border: 1px solid #f1f5f9;
+@media (max-width: 850px) {
+    .dashboard-grid { grid-template-columns: 1fr; }
+    .top-bar { justify-content: center; }
 }
